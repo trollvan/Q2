@@ -1,0 +1,30 @@
+<div class="users-table">
+  <%= form_for(:actions, url: users_actions_path ) do |form| %>
+    <%= form.submit('Unlock', class: 'btn btn-primary', id: 'unlock_btn') %>
+    <%= form.submit('Lock', class: 'btn btn-secondary', id: 'lock_btn') %>
+    <%= form.submit('Delete', class: 'btn btn-danger', id: 'delete_btn') %>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+          <th scope="col">Email</th>
+          <th scope="col">Last sign in</th>
+          <th scope="col">Last sign out</th>
+          <th scope="col">Locked</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for user in @users %>
+            <tr>
+                <td><%= form.check_box(:user_ids, { multiple: true }, user.id, nil) %></td>
+                <td><%= user.email %></td>
+                <td><%= l(user.last_sign_in_at) %></td>
+                <td><%= l(user.last_sign_out_at) %></td>
+                <td><%= user.locked ? fa_icon('lock') : fa_icon('unlock') %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
