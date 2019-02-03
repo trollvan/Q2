@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(omniauth)
     auth = Auth.where(provider: omniauth.provider, uid: omniauth.uid).first_or_create
+    Rails.logger.error(auth.inspect)
     if auth.new_record? && omniauth.provider != 'twitter'
       auth.user = User.create(
         email: omniauth.info.email,

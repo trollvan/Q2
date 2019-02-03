@@ -9,7 +9,6 @@ module Users
     end
 
     def twitter
-      p omniauth
       user = User.from_omniauth(omniauth)
       if user.present?
         sign_in_and_redirect user, event: :authentication
@@ -19,7 +18,6 @@ module Users
           provider: omniauth.provider,
           uid: omniauth.uid
         }
-        p session.to_h
         redirect_to new_users_registrations_path
       end
     end
