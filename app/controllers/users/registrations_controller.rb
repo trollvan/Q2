@@ -7,7 +7,7 @@ module Users
     def create
       @user = User.new(user_params.merge(password: Devise.friendly_token[0, 20]))
       if @user.save
-        omniauth = user_session['devise.twitter_data']
+        omniauth = session['devise.twitter_data']
         Auth.create(
           provider: omniauth[:provider],
           uid: omniauth[:uid],
