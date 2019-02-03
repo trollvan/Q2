@@ -1,5 +1,11 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  devise_for :users, skip: [:sessions]
+  devise_for :users,
+             skip: %i[registrations passwords],
+             controllers: {
+               omniauth_callbacks: 'users/omniauth_callbacks'
+             }
 
   namespace :users do
     resource :actions, only: :create
