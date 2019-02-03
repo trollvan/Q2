@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :auths
 
-  def self.from_omniauth(auth)
+  def self.from_omniauth(omniauth)
     auth = Auth.where(provider: auth.provider, uid: auth.uid).first_or_create
     Rails.logger.error(auth.inspect)
     if auth.new_record?
