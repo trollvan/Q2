@@ -10,7 +10,13 @@
   </head>
 
   <body>
-    <div class="container">
+    <nav class='navbar navbar-light bg-light d-flex'>
+      <%= link_to 'Itrach', root_path, class: 'navbar-brand' %>
+      <% if user_signed_in? %>
+        <%= link_to 'Sign out', destroy_user_session_path, class: 'ml-auto p-2' %>
+      <% end %>
+    </nav>
+    <div class='container'>
       <%= yield %>
     </div>
   </body>
