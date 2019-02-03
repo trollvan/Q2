@@ -15,9 +15,9 @@ module Users
         omniauth = session['devise.twitter_data']
         Rails.logger.error(omniauth)
         auth = Auth.create(
-          provider: omniauth['provider'],
-          uid: omniauth['uid'],
-          user: @user
+          provider: omniauth.fetch('provider'),
+          uid: omniauth.fetch('uid'),
+          user_id: @user.id
         )
         Rails.logger.error(auth)
         sign_in_and_redirect @user, event: :authentication
