@@ -17,11 +17,9 @@ module Users
           uid: omniauth[:uid],
           user: @user
         )
-        sign_in @user
-        redirect_to root_path
+        sign_in_and_redirect @user, event: :authentication
       elsif @user.persisted?
-        sign_in @user
-        redirect_to root_path
+        sign_in_and_redirect @user, event: :authentication
       else
         render :new
       end
