@@ -18,6 +18,7 @@ module Users
           provider: omniauth.provider,
           uid: omniauth.uid
         }
+        Rails.logger.error(session.to_h)
         redirect_to new_users_registrations_path
       end
     end
