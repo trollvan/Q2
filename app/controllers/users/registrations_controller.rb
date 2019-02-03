@@ -19,6 +19,9 @@ module Users
         )
         sign_in @user
         redirect_to root_path
+      elsif @user.persisted?
+        sign_in @user
+        redirect_to root_path
       else
         render :new
       end
