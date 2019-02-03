@@ -12,11 +12,11 @@ module Users
       p omniauth
       user = User.from_omniauth(omniauth)
       p user
-      session['devise.facebook_data'] = {
+      user_session['devise.facebook_data'] = {
         provider: omniauth.provider,
         uid: omniauth.uid
       }
-      p session
+      p session.to_h
       redirect_to new_user_registration_url
     end
 
