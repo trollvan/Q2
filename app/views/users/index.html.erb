@@ -19,8 +19,8 @@
             <tr>
                 <td><%= form.check_box(:user_ids, { multiple: true }, user.id, nil) %></td>
                 <td><%= user.email %></td>
-                <td><%= l(user.last_sign_in_at) %></td>
-                <td><%= l(user.last_sign_out_at) %></td>
+                <td><%= user.last_sign_in_at.present? ? I18n.l(user.last_sign_in_at) : '-' %></td>
+                <td><%= user.last_sign_out_at.present? ? I18n.l(user.last_sign_out_at): '-' %></td>
                 <td><%= user.locked ? fa_icon('lock') : fa_icon('unlock') %></td>
             </tr>
         <% end %>
