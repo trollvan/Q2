@@ -21,10 +21,12 @@ module Users
     end
 
     def vkontakte
-      p omniauth
+      Rails.logger.error(omniauth.inspect)
       user = User.from_omniauth(omniauth)
+      Rails.logger.error(user)
       sign_in_and_redirect user, event: :authentication
       set_flash_message(:notice, :success, kind: 'Vk') if is_navigational_format?
+      redirect_to root_path
     end
 
     private
