@@ -1,0 +1,16 @@
+<div class='d-flex justify-content-center align-items-center sign-in-links'>
+  <%= form_for @user, url: users_registrations_path do |f| %>
+    <% if @user.errors.present? %>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    <div class='form-group'>
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+    <%= f.submit 'Submit', class: 'btn btn-submit' %>
+  <% end %>
+</div>

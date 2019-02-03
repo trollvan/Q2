@@ -11,13 +11,17 @@ module Users
     def twitter
       p omniauth
       user = User.from_omniauth(omniauth)
-      p user
-      user_session['devise.facebook_data'] = {
-        provider: omniauth.provider,
-        uid: omniauth.uid
-      }
-      p session.to_h
-      redirect_to new_user_registration_url
+      if user.present?
+        sign_in_and_redirect user, event: :authentication
+        set_flash_message(:notice, :success, kind: 'Twitter') if is_navigational_format?
+      else
+        user_session['devise.twitter_data'] = {
+          provider: omniauth.provider,
+          uid: omniauth.uid
+        }
+        p session.to_h
+        redirect_to new_user_registration_url
+      end
     end
 
     def vkontakte

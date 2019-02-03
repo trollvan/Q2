@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(omniauth)
     auth = Auth.where(provider: omniauth.provider, uid: omniauth.uid).first_or_create
-    if auth.new_record?
+    if auth.new_record? && provider != 'twitter'
       auth.user = User.create(
         email: omniauth.info.email,
         password: Devise.friendly_token[0, 20]
