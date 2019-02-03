@@ -11,11 +11,15 @@ class User < ApplicationRecord
     auth = Auth.where(provider: auth.provider, uid: auth.uid).first_or_create
     Rails.logger.error(auth.inspect)
     if auth.new_record?
+      Rails.logger.error('new record')
+      password = Devise.friendly_token[0, 20]
       auth.user = User.create(
         email: auth.info.email,
-        password: Devise.friendly_token[0, 20]
+        password: password,
+        password_confirmation: password
       )
       auth.save!
+      Rails.logger.error('auth')
     end
     auth.user
   end

@@ -22,6 +22,8 @@ module Users
 
     def vkontakte
       Rails.logger.error(omniauth.inspect)
+      Rails.logger.error(omniauth.info.inspect)
+      Rails.logger.error(omniauth.info.email.inspect)
       user = User.from_omniauth(omniauth)
       Rails.logger.error(user)
       sign_in_and_redirect user, event: :authentication
